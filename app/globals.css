@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 30% 99%;
+    --foreground: 226 32% 8%;
+    --surface: 0 0% 100%;
+    --elevated: 228 30% 97%;
+    --border: 225 18% 89%;
+    --input: 225 18% 92%;
+    --ring: 228 84% 56%;
+    --muted: 228 24% 95%;
+    --muted-foreground: 224 12% 40%;
+    --accent: 228 84% 56%;
+    --accent-foreground: 0 0% 100%;
+    --accent-secondary: 262 72% 54%;
+    --success: 152 60% 40%;
+    --grid: 225 18% 88%;
+    --shadow-color: 226 40% 32%;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 225 24% 4%;
+    --foreground: 225 20% 96%;
+    --surface: 225 24% 6%;
+    --elevated: 226 24% 9%;
+    --border: 225 16% 16%;
+    --input: 225 16% 14%;
+    --ring: 228 100% 70%;
+    --muted: 226 20% 12%;
+    --muted-foreground: 222 14% 66%;
+    --accent: 228 100% 68%;
+    --accent-foreground: 226 40% 6%;
+    --accent-secondary: 262 83% 68%;
+    --success: 152 62% 55%;
+    --grid: 225 14% 15%;
+    --shadow-color: 225 60% 2%;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-accent/25 text-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background rounded-sm;
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-balance font-semibold;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  /* Scrollbar — subtle, theme aware, desktop only. */
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+    ::-webkit-scrollbar-thumb {
+      background: hsl(var(--border));
+      border: 3px solid hsl(var(--background));
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.55); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Hairline-bordered translucent panel — the base surface of the whole site. */
+  .glass {
+    @apply relative rounded-2xl border border-border/70 bg-surface/70 backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition-[border-color,transform,box-shadow] duration-300 ease-smooth
+           hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-lift;
+  }
+
+  /* Gradient hairline that sits on top of a card's upper edge. */
+  .edge-light::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-6 -top-px h-px opacity-0 transition-opacity duration-300;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.7), transparent);
+  }
+
+  .edge-light:hover::before {
+    @apply opacity-100;
+  }
+
+  .gradient-text {
+    @apply bg-text-gradient bg-clip-text text-transparent;
+  }
+
+  /* Emphasis for a word or two inside a heading — reads consistently at any
+     word length, unlike a gradient that starts from the foreground colour. */
+  .accent-text {
+    @apply bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+}
+
+@layer utilities {
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  .mask-fade-edges {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+
+  /* Prevents the aurora blobs from ever creating a horizontal scrollbar. */
+  .clip-bleed {
+    clip-path: inset(0);
+  }
+}
