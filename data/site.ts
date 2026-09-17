@@ -21,8 +21,11 @@ export const siteConfig = {
   headline: 'Building fast, scalable and beautiful web experiences.',
   description:
     'Frontend Developer with 3.8+ years of experience building responsive, scalable and high-performance web applications with React.js, Next.js and TypeScript — including enterprise AI, job portal and e-commerce products.',
-  /** Set NEXT_PUBLIC_SITE_URL in Vercel once you have a domain. [ADD] */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nikita-owalekar.vercel.app',
+  /** Set NEXT_PUBLIC_SITE_URL in Vercel once you have a domain. [ADD]
+   *  `||` on purpose, not `??` — an env var that exists but is left blank on
+   *  the deploy platform is `''`, which `new URL()` in layout.tsx would throw
+   *  on rather than silently fall back from. */
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://nikita-owalekar.vercel.app',
   location: 'Bengaluru, Karnataka, India',
   email: 'nikitakaushal98@gmail.com',
   phone: '+91 8270555456',
