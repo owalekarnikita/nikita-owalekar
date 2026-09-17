@@ -1,6 +1,7 @@
 import { Mail } from 'lucide-react';
 import Link from 'next/link';
 
+import { Logomark } from '@/components/ui/logo';
 import { SocialIconLink } from '@/components/ui/social-icon';
 import { navLinks, siteConfig } from '@/data/site';
 
@@ -13,9 +14,7 @@ export function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-surface font-mono text-xs font-semibold">
-                {siteConfig.initials}
-              </span>
+              <Logomark />
               <span className="text-sm font-semibold tracking-tight">{siteConfig.name}</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">

@@ -72,7 +72,7 @@ const cover = (slug: string, alt: string): Screenshot => ({
 export const projects: Project[] = [
   {
     slug: 'syngenta-dossier-automation',
-    title: 'Syngenta Dossier Automation',
+    title: 'Dossier Automation',
     tagline: 'Enterprise AI document automation for regulatory dossiers',
     summary:
       'An enterprise platform that automates regulatory dossier work with AI services. I am the sole frontend developer on it.',

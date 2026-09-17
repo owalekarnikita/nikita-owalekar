@@ -55,13 +55,21 @@ export default function OpengraphImage() {
               width: 56,
               height: 56,
               borderRadius: 16,
-              background: 'linear-gradient(120deg, #5479FF, #8B5CF6)',
-              color: 'white',
-              fontSize: 22,
-              fontWeight: 700,
+              background: '#0B1220',
+              border: '1px solid rgba(139,92,246,0.35)',
             }}
           >
-            {siteConfig.initials}
+            <svg width="32" height="32" viewBox="0 0 64 64">
+              <path
+                d="M17 21 L17 44 M17 21 L33 44 M33 21 L33 44"
+                fill="none"
+                stroke="#F8FAFC"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <circle cx="47" cy="32.5" r="10.5" fill="none" stroke="#8B5CF6" strokeWidth="6" />
+            </svg>
           </div>
           <div style={{ color: '#8B93A7', fontSize: 26, letterSpacing: 4 }}>
             {siteConfig.role.toUpperCase()}

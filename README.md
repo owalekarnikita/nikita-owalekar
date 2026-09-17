@@ -38,7 +38,7 @@ npm run typecheck  # tsc --noEmit
 | `data/about.ts` | About copy, the `nikita.ts` code card, focus-area chips |
 | `data/skills.ts` | Skill groups — exactly the technologies listed on the résumé |
 | `data/experience.ts` | Purple Talk / FRS Labs / Tarkashilpa / Kernify timeline, education, certifications |
-| `data/projects.ts` | Syngenta Dossier Automation, Seikor, Organik Truck — cards *and* case studies |
+| `data/projects.ts` | Dossier Automation, Seikor, Organik Truck — cards *and* case studies |
 | `data/highlights.ts` | The "How I build" cards |
 | `data/github.ts` | GitHub section (currently switched off — see below) |
 | `data/contact.ts` | Contact headings and form labels |

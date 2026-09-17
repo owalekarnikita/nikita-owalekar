@@ -134,7 +134,7 @@ export function ContactForm() {
             onChange={update('name')}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
-            placeholder="Jane Doe"
+            placeholder={siteConfig.name}
             className={fieldClasses(Boolean(errors.name))}
           />
           {errors.name ? (

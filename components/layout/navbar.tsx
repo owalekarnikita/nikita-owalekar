@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { ButtonLink } from '@/components/ui/button';
+import { Logomark } from '@/components/ui/logo';
 import { SocialIconLink } from '@/components/ui/social-icon';
 import { navLinks, sectionIds, siteConfig } from '@/data/site';
 import { cn } from '@/lib/utils';
@@ -86,12 +87,7 @@ export function Navbar() {
           className="group flex items-center gap-2.5 rounded-lg"
           aria-label={`${siteConfig.name} — home`}
         >
-          <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-xl border border-border bg-surface font-mono text-xs font-semibold tracking-tight">
-            <span className="absolute inset-0 bg-accent-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <span className="relative transition-colors duration-300 group-hover:text-white">
-              {siteConfig.initials}
-            </span>
-          </span>
+          <Logomark className="transition-transform duration-300 group-hover:scale-105" />
           <span className="hidden text-sm font-semibold tracking-tight sm:block">
             {siteConfig.name}
           </span>

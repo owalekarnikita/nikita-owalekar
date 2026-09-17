@@ -19,6 +19,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { ArchitectureDiagram } from '@/components/projects/architecture-diagram';
+import { ScreenshotLightbox } from '@/components/projects/screenshot-lightbox';
 import { TechChip } from '@/components/ui/badge';
 import { ButtonLink } from '@/components/ui/button';
 import { Reveal } from '@/components/ui/reveal';
@@ -256,27 +257,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
               icon={<Images size={17} strokeWidth={1.75} aria-hidden />}
               title="Screenshots"
             >
-              <div className="space-y-6">
-                {study.screenshots.map((shot) => (
-                  <figure key={shot.src}>
-                    <div className="glass relative aspect-[16/10] overflow-hidden">
-                      <Image
-                        src={shot.src}
-                        alt={shot.alt}
-                        fill
-                        loading="lazy"
-                        sizes="(min-width: 1024px) 800px, 100vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    {shot.caption ? (
-                      <figcaption className="mt-3 font-mono text-xs text-muted-foreground">
-                        {shot.caption}
-                      </figcaption>
-                    ) : null}
-                  </figure>
-                ))}
-              </div>
+              <ScreenshotLightbox screenshots={study.screenshots} />
             </Block>
           </div>
 

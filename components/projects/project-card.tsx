@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { TechChip } from '@/components/ui/badge';
+import { Spotlight } from '@/components/ui/spotlight';
 import type { Project } from '@/data/projects';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +18,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
   return (
     <article className="group relative">
-      <div
+      <Spotlight
         className={cn(
           'glass edge-light grid overflow-hidden transition-[border-color,box-shadow,transform] duration-500 ease-smooth',
           'hover:-translate-y-1 hover:border-accent/30 hover:shadow-lift lg:grid-cols-2',
@@ -137,7 +138,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             ) : null}
           </div>
         </div>
-      </div>
+      </Spotlight>
     </article>
   );
 }

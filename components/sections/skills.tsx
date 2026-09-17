@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
+import { Spotlight } from '@/components/ui/spotlight';
 import { skillGroups, type SkillGroup, type SkillLevel } from '@/data/skills';
 import { EASE } from '@/lib/motion';
 import { cn } from '@/lib/utils';
@@ -85,57 +86,71 @@ export function Skills() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="glass glass-hover edge-light p-6"
+                className="glass glass-hover edge-light overflow-hidden"
               >
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-elevated/70 text-accent">
-                    <Icon size={18} strokeWidth={1.75} aria-hidden />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold tracking-tight">{group.title}</h3>
-                    <p className="text-xs text-muted-foreground">{group.description}</p>
+                <Spotlight className="p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-elevated/70 text-accent">
+                      <Icon size={18} strokeWidth={1.75} aria-hidden />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-semibold tracking-tight">{group.title}</h3>
+                      <p className="text-xs text-muted-foreground">{group.description}</p>
+                    </div>
                   </div>
-                </div>
 
-                <ul className="mt-5 space-y-1">
-                  {group.skills.map((skill) => (
-                    <li key={skill.name}>
-                      <div
-                        className="group/skill flex items-center justify-between gap-3 rounded-lg px-2.5 py-2 transition-colors duration-200 hover:bg-elevated/70"
-                        title={skill.note}
-                      >
-                        <span className="whitespace-nowrap text-sm text-foreground/90">
-                          {skill.name}
-                        </span>
+                  <ul className="mt-5 space-y-1">
+                    {group.skills.map((skill, skillIndex) => (
+                      <li key={skill.name}>
+                        <div
+                          className="group/skill flex items-center justify-between gap-3 rounded-lg px-2.5 py-2 transition-colors duration-200 hover:bg-elevated/70"
+                          title={skill.note}
+                        >
+                          <span className="whitespace-nowrap text-sm text-foreground/90">
+                            {skill.name}
+                          </span>
 
-                        {/* The note is a tooltip rather than inline text: at card
-                            width it would squeeze longer skill names onto two lines. */}
-                        <span className="flex shrink-0 items-center gap-2">
-                          {skill.level ? (
-                            <span
-                              className="flex items-center gap-1"
-                              aria-label={levelLabel[skill.level]}
-                              title={levelLabel[skill.level]}
-                            >
-                              {[1, 2, 3].map((step) => (
-                                <span
-                                  key={step}
-                                  aria-hidden
-                                  className={cn(
-                                    'h-1 w-4 rounded-full transition-colors duration-200',
-                                    step <= levelSteps[skill.level as SkillLevel]
-                                      ? 'bg-accent/70 group-hover/skill:bg-accent'
-                                      : 'bg-border',
-                                  )}
-                                />
-                              ))}
-                            </span>
-                          ) : null}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                          {/* The note is a tooltip rather than inline text: at card
+                              width it would squeeze longer skill names onto two lines. */}
+                          <span className="flex shrink-0 items-center gap-2">
+                            {skill.level ? (
+                              <span
+                                className="flex items-center gap-1"
+                                aria-label={levelLabel[skill.level]}
+                                title={levelLabel[skill.level]}
+                              >
+                                {[1, 2, 3].map((step) => {
+                                  const filled = step <= levelSteps[skill.level as SkillLevel];
+                                  return (
+                                    <span
+                                      key={step}
+                                      aria-hidden
+                                      className="h-1 w-4 overflow-hidden rounded-full bg-border"
+                                    >
+                                      {filled ? (
+                                        <motion.span
+                                          initial={{ scaleX: 0 }}
+                                          animate={{ scaleX: 1 }}
+                                          transition={{
+                                            duration: 0.45,
+                                            ease: EASE,
+                                            delay: 0.15 + skillIndex * 0.05 + step * 0.06,
+                                          }}
+                                          style={{ transformOrigin: 'left' }}
+                                          className="block h-full w-full rounded-full bg-accent/70 transition-colors duration-200 group-hover/skill:bg-accent"
+                                        />
+                                      ) : null}
+                                    </span>
+                                  );
+                                })}
+                              </span>
+                            ) : null}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </Spotlight>
               </motion.article>
             );
           })}
