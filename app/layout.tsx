@@ -6,6 +6,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { PlaceholderNotice } from '@/components/layout/placeholder-notice';
 import { MotionProvider } from '@/components/theme/motion-provider';
 import { ThemeProvider } from '@/components/theme/theme-provider';
+import { BackToTop } from '@/components/ui/back-to-top';
 import { PageBackground } from '@/components/ui/background';
 import { education, experience } from '@/data/experience';
 import { seo, siteConfig } from '@/data/site';
@@ -140,6 +141,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <main id="main">{children}</main>
             <Footer />
+            <BackToTop />
             <PlaceholderNotice />
           </MotionProvider>
         </ThemeProvider>
